@@ -13,7 +13,7 @@ import {
 class App extends React.Component {
   render() {
     return (
-      <Router >
+      <BrowserRouter>
         <div>
           <Route exact path="/" component={Home} />
           <Route path="/Activity" component={Activity} />
@@ -21,7 +21,7 @@ class App extends React.Component {
           <Route path='/Personal' component={Personal} />
         </div>
 
-      </Router>
+      </BrowserRouter>
     );
   }
 }

@@ -13,7 +13,7 @@ import {
 class App extends React.Component {
   render() {
     return (
-      <Router >
+      <Router>
         <div>
           <Route exact path="/" component={Home} />
           <Route path="/Activity" component={Activity} />
