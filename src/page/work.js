@@ -3,7 +3,7 @@ class active extends Component {
     render() {
         return (
             <div>
-                <h2>About</h2>
+                <h2>work</h2>
             </div>
         )
     }
