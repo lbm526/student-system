@@ -1,3 +1,4 @@
+![展示图](https://github.com/lbm526/student-system/blob/master/GIF.gif)  
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
