@@ -14,9 +14,12 @@ export default class appBar extends Component {
         this.state = {
             open: false,
             fTitle: '',
-            fText: ''
+            fText: '',
+            parenfId: '',
+            parentTitle: '添加活动'
         }
         this.handleClose = this.handleClose.bind(this);
+        this.addDetail = this.addDetail.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.changFTitle = this.changFTitle.bind(this);
         this.changFText = this.changFText.bind(this);
@@ -27,19 +30,38 @@ export default class appBar extends Component {
     componentDidMount() {
         this.props.onRef(this) //2-在子组件 componentDidMount 中把 this 传给父组件
     }
+
     // 打开模态框
     handleOpen() {
+        if(this.props.parentTitle){
+            this.setState({
+                parentTitle: this.props.parentTitle
+            })
+        }
         if (this.props.parenfId) {
-            this.getDetailList();
+            this.setState({
+                parenfId: this.props.parenfId
+            }, () => this.getDetailList())
         }
         this.setState({
             open: true,
         })
     }
+    addDetail() {
+        this.setState({
+            open: true,
+            fTitle: '',
+            fText: '',
+            parenfId: '',
+            parentTitle: '添加活动'
+        })
+    }
     // 关闭模态框
     handleClose() {
         this.setState({
-            open: false
+            open: false,
+            fTitle: '',
+            fText: '',
         })
     }
     // 监听标题
@@ -59,7 +81,7 @@ export default class appBar extends Component {
         var that = this;
         ajax({
             type: "get",
-            url: "http://47.102.114.82:19902/bd_activites/selectByPrimaryKey?fId=" + this.props.parenfId,
+            url: "http://47.102.114.82:19902/bd_activites/selectByPrimaryKey?fId=" + this.state.parenfId,
             dataType: "json",
             beforeSend: function () {
                 //some js code 
@@ -106,7 +128,7 @@ export default class appBar extends Component {
     }
     // 提交
     commitContent() {
-        if (this.props.parenfId) {
+        if (this.state.parenfId) {
             this.upDateActive()
         } else {
             let option = { fTitle: this.state.fTitle, fText: this.state.fText, fClassID: '' }
@@ -122,7 +144,7 @@ export default class appBar extends Component {
         return (
             <div id="appBar">
                 <div className={'appBar'}>
-                    <AddIcon onClick={this.handleOpen} className={'addIcon'} />
+                    <AddIcon onClick={this.addDetail} className={'addIcon'} />
                     <span>活动列表</span>
                 </div>
                 <Modal
@@ -139,7 +161,7 @@ export default class appBar extends Component {
                 >
                     <Fade in={this.state.open}>
                         <div className={'activePaper textCenter'}>
-                            <h4 id="transition-modal-title">{this.props.parentTitle}</h4>
+                            <h4 id="transition-modal-title">{this.state.parentTitle}</h4>
                             {/* {this.props.title === '添加活动' ? <div>aaa</div> : <div>bbb</div>} */}
                             <TextField
                                 id="filled-multiline-flexible"

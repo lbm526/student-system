@@ -45,7 +45,7 @@ class Home extends Component {
 
         this.changNav = this.changNav.bind(this);
     }
-    
+
     changNav(path) {
         // 切换页面
         this.goPath = path;
@@ -71,9 +71,11 @@ class Home extends Component {
                         } */}
                         {/* <Switch> */}
                         {/* <Route path='/homePage' exact component={HomePage} /> */}
-                        <Route path={'/#/Activity'} exact component={Activity} />
-                        <Route path={'/#/Activity/:fId'} component={Activity} />
-                        <Route path={'/#/Work'} component={Work} />
+                        <Switch>
+                            <Route path={'/#/Activity'} exact component={Activity} />
+                            <Route path={'/#/Activity/:fId'} component={Activity} />
+                            <Route path={'/#/Work'} component={Work} />
+                        </Switch>
                         {/* <Route path="/Personal" component={Personal} /> */}
                     </div>
 
